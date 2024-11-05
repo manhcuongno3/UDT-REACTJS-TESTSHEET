@@ -12,7 +12,15 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
-    ],  
+      {
+        test: /\.scss$/,
+        use: [
+          'css-loader',
+          'sass-loader',
+        ],
+        exclude: /node_modules/,
+      },
+    ],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],

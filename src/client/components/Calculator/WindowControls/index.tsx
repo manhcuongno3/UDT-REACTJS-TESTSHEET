@@ -1,3 +1,4 @@
+import '../styles/index.scss';
 import React from 'react';
 
 export const WindowControls: React.FC = () => (

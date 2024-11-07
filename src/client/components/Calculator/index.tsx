@@ -1,24 +1,16 @@
-import React, { useState } from 'react';
-import './styles.scss';
-
-import { WindowControls } from './WindowControls';
-import { Display } from './Display';
+import React from 'react';
+import Display from './Display';
 import { Keypad } from './Keypad';
+import { WindowControls } from './WindowControls';
+import './styles/index.scss';
 
 const Calculator: React.FC = () => {
-  const [display, setDisplay] = useState('0');
-
-  const handleKeyPress = (value: string) => {
-    // Add handler logic later
-    setDisplay(value);
-  };
-
   return (
     <div className="calculator-wrapper">
       <div className="calculator">
         <WindowControls />
-        <Display value={display} />
-        <Keypad onKeyPress={handleKeyPress} />
+        <Display />
+        <Keypad />
       </div>
     </div>
   );

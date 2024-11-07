@@ -1,18 +1,17 @@
+@use './_variables' as *;
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-$calculator-bgcorlor: #5b5253;
-$key-color: #e8e7e7;
 
 .calculator-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f0f0f0;
+  background-color: $background;
   font-family: 'Inter', sans-serif;
 }
 
 .calculator {
-  background-color: $calculator-bgcorlor;
+  background-color: $calculator-bgcolor;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   width: 320px;
@@ -27,20 +26,32 @@ $key-color: #e8e7e7;
       height: 12px;
       border-radius: 50%;
       
-      &.close { background-color: #fc605c; }
-      &.minimize { background-color: #fcbb40; }
-      &.maximize { background-color: #34c648; }
+      &.close { background-color: $window-close; }
+      &.minimize { background-color: $window-minimize; }
+      &.maximize { background-color: $window-maximize; }
     }
   }
   
   .display {
-    background-color: $calculator-bgcorlor;
+    background-color: $calculator-bgcolor;
     color: $key-color;
     text-align: right;
     padding:0 10px;
     font-size: 60px;
     letter-spacing: 2px;
     font-weight: 300;
+    
+    .display-input {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: none;
+      color: inherit;
+      font-size: inherit;
+      text-align: right;
+      outline: none;
+      animation: blink 1s infinite;
+    }
   }
   
   .keypad {
@@ -55,7 +66,7 @@ $key-color: #e8e7e7;
       border: none;
       font-size: 24px;
       padding: 20px;
-      background-color: #847d7d;
+      background-color: $key-bgcolor;
       color: $key-color;
       cursor: pointer;
       transition: background-color 0.2s;
@@ -63,23 +74,29 @@ $key-color: #e8e7e7;
       letter-spacing: 1px;
       
       &:hover {
-        background-color: #908e8e;
+        background-color: $key-hover;
       }
       
       &.function {
-        background-color: #6b6364;
+        background-color: $function-key-bgcolor;
         color: $key-color;
         
         &:hover {
-          background-color: #b5b5b5;
+          background-color: $function-key-hover;
         }
       }
       
       &.operator {
-        background-color: #fd9e2b;
+        background-color: $operator-bgcolor;
         
         &:hover {
-          background-color: #ffb13a;
+          background-color: $operator-hover;
+        }
+        
+        &.active {
+          background-color: $background;
+          color: $operator-bgcolor;
+          filter: brightness(1.2);
         }
       }
       
@@ -87,5 +104,11 @@ $key-color: #e8e7e7;
         grid-column: span 2;
       }
     }
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.5;
   }
 }

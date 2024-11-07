@@ -1,0 +1,31 @@
+.calculator-history {
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  
+  h2 {
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+  
+  .history-list {
+    ul {
+      list-style: none;
+      padding: 0;
+      
+      li {
+        padding: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+    
+    p {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}

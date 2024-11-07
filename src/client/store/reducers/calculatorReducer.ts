@@ -63,21 +63,11 @@ export const calculatorReducer = (
           return { ...state, display: ERROR_DISPLAY, currentInput: "", activeOperator: null };
         }
 
-        // Handle empty input
-        if (!state.currentInput) {
-          return {
-            ...state,
-            display: DEFAULT_DISPLAY,
-            currentInput: "",
-            activeOperator: null
-          };
-        }
-
         // Handle input contains only division operator (÷)
         if (/[÷]+$/.test(state.currentInput)) {
           return {
             ...state,
-            display: state.currentInput.length === 1 ? "1" : ERROR_DISPLAY,
+            display: state.currentInput.length === 1 ? ERROR_DISPLAY : "1",
             currentInput: "",
             activeOperator: null
           };
@@ -85,7 +75,7 @@ export const calculatorReducer = (
 
         // Handle when input contains only operators (+, -, x) and special operators end with operator
         if (/[+\-x]+$/.test(state.currentInput)) {
-          if (state.currentInput.length <= 1) {
+          if (state.currentInput.length === 1) {
             return {
               ...state,
               display: DEFAULT_DISPLAY,
@@ -95,17 +85,13 @@ export const calculatorReducer = (
           } else {
             // Special experssion end with operator handling
             const lastOperator = state.currentInput.slice(-1);
-            if (SPECIAL_OPERATORS[lastOperator]) {
-              const result = SPECIAL_OPERATORS[lastOperator](parseFloat(state.display.replace(',', '.')));
-
-              return {
+            const result = SPECIAL_OPERATORS[lastOperator](parseFloat(state.display.replace(',', '.')));
+            return {
                 ...state,
                 display: formatResult(result),
                 currentInput: "",
                 activeOperator: null
-              };
-            }
-            return state;
+            };
           }
         }
 
@@ -117,6 +103,7 @@ export const calculatorReducer = (
           if (state.activeOperator) {
             return {
               ...state,
+              display: DEFAULT_DISPLAY,
               currentInput: "",
               activeOperator: null
             };
